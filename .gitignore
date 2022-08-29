@@ -1,0 +1,9 @@
+settings.py
+debug.log
+database.json
+.idea/
+Pipfile
+Pipfile.lock
+__pycache__/
+botrequests/__pycache__/
+botEnv/
