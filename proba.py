@@ -11,7 +11,7 @@ import pprint
 import datetime
 
 headers_dict = {
-    'X-RapidAPI-Key': '5bbb5c2f65msh17b2cb03b4c6553p19e639jsnbfe2564f778f',
+    'X-RapidAPI-Key': '00000000000000000000000000000000000000000',
     'X-RapidAPI-Host': 'hotels4.p.rapidapi.com'
   }
 url = "https://hotels4.p.rapidapi.com/locations/search"
