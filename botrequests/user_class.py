@@ -21,7 +21,7 @@ class User:
         В callback_data передаётся destinationId города плюс буква от названия города (для определения языка)
         и плюс литера, указывающая на изначальную цель поиска: 'cityP1234567l'
         """
-        text = translate_eng(message.text, "Веду поиск, надо подождать...")
+        text = translate_eng(message.text, f"Веду поиск в городе {message.text}, надо подождать...")
         self.bot.send_message(self.chat_id, text)
         count = 0
         markup = types.InlineKeyboardMarkup()

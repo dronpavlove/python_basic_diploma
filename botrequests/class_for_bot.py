@@ -39,13 +39,23 @@ class City:
         url = "https://hotels4.p.rapidapi.com/locations/search"
         querystring = {"query": self.city_info, "locale": self.lang}
         headers = self.__headers
-
+        # теперь здесь сразу возвращает найденные гостиницы в городе на одной странице...
         try:
             response = requests.get(url, headers=headers, params=querystring)
             data_deaths = json.loads(response.text)
-            data = data_deaths["suggestions"][0]["entities"]
-            for item in data:
-                yield {'call_name': self.clear_text(item['caption']), 'call_result': item}
+            city_name = data_deaths['term']
+            hotels_list = [i['entities'] for i in data_deaths['suggestions'] if len(i['entities']) > 0]  # ["suggestions"][0]["entities"]
+            for num in range(len(hotels_list)):
+                for hotel in hotels_list[num]:
+                    # А нужно возвращать только согласно команде (дорогие, дешевые, удалённость
+                    # Нужно продумать обработку. И лучше потом по нажатию кнопки с названием гостиницы возвращать
+                    # полную инфу о выбранной гостинице (фото, адрес...)
+                    # Я бы в взял наверное 'destinationId': '204643' от каждой гостиницы в кнопку спрятал
+                    # и делал новый запрос...
+                    # Но МОГУ ОШИБАТЬСЯ: подозрительно мало отелей выдаёт. Надо изучать API, а мне не хочется...
+                    # hotel_search ТЕПЕРЬ ВООБЩЕ НАДО ПОДРУГОМУ НАВЕРНОЕ ОРГАНИЗОВЫВАТЬ
+                    yield {'call_name': hotel['name'], 'call_result': hotel}
+
         except KeyError:
             return None
 
